@@ -1,5 +1,5 @@
 export default class RandomService {
-  _apiBase = 'https://randomuser.me/api/?results=20';
+  _apiBase = 'https://randomuser.me/api/?results=500';
 
   getResource = async (url) => {
     const res = await fetch(`${this._apiBase}${url}`);
@@ -41,10 +41,12 @@ export default class RandomService {
       .map(this._transformPerson);
   }
 
+  date = new Date().getTime();
+
   _transformPerson = (person) => {
     return {
-      id: person.id.value,
-      name: `${person.name.title && '.'} ${person.name.first} ${person.name.last}`,
+      id: `${person.login.uuid}`,
+      name: `${person.name.title}. ${person.name.first} ${person.name.last}`,
       age: person.dob.age,
       phone: person.cell,
       email: person.email,
