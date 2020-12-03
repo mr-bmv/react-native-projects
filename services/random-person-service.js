@@ -1,5 +1,5 @@
 export default class RandomService {
-  _apiBase = 'https://randomuser.me/api/?results=500';
+  _apiBase = 'https://randomuser.me/api/?results=10';
 
   getResource = async (url) => {
     const res = await fetch(`${this._apiBase}${url}`);
@@ -14,8 +14,10 @@ export default class RandomService {
   /** 
    * @param {string} gender - enumerator: male, female
    */
-  getGender = async (gender = 'male') => {
-    const res = await this.getResource(`&gender=${gender}`);
+  getGender = async (gender) => {
+    const search = gender.male ? 'male' : 'female'
+
+    const res = await this.getResource(`&gender=${search}`);
     return res.results
       .map(this._transformPerson);
   }
@@ -25,6 +27,7 @@ export default class RandomService {
    * @param {string} nat - enumerator : AU, BR, CA, CH, DE, DK, ES, FI, FR, GB, IE, IR, NO, NL, NZ, TR, US
    */
   getNationality = async (nat = 'US') => {
+    console.log("getNationality")
     const res = await this.getResource(`&nat=${nat}`);
     return res.results
       .map(this._transformPerson);

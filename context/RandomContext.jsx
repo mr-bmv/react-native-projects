@@ -27,6 +27,22 @@ const RandomProvider = ({ children }) => {
         dispatch({ type: GET_USERS, payload: response })
     }
 
+    const getByGender = async (genderList) => {
+        setLoading();
+
+        console.log('genderList - ', genderList)
+
+        if ((genderList.male && genderList.female)
+            || (!genderList.male && !genderList.female)) {
+            console.log('Should be all users')
+            getUsers();
+        } else {
+            const response = await service.getGender(genderList);
+
+            dispatch({ type: GET_USERS, payload: response })
+        }
+    }
+
     const setLoading = () => {
         dispatch({ type: SET_LOADING })
     }
@@ -35,7 +51,8 @@ const RandomProvider = ({ children }) => {
         <RandomContext.Provider value={
             {
                 state,
-                getUsers
+                getUsers,
+                getByGender
             }}
         >
             { children}
