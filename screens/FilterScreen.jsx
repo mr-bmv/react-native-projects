@@ -3,19 +3,20 @@ import { View, Text, Button, StyleSheet } from 'react-native'
 import CheckBox from '@react-native-community/checkbox';
 import { useRandomContext } from '../context/RandomContext';
 
-
-
 const FilterScreen = ({ navigation }) => {
-    const [isGender, setGender] = React.useState({ male: false, female: false });
-    
+    const [isGender, setGender] = React.useState({
+        gender: { male: false, female: false },
+        nat: false
+    });
+
     const { getByGender } = useRandomContext();
 
     const onFilter = (gender) => {
-        setGender((isSelected) => { return { ...isSelected, [gender]: !isSelected[gender] } })
+        setGender((isSelected) => ({ ...isSelected, gender: { ...isSelected.gender, [gender]: !isSelected[gender] } }))
     }
 
     const postFilterList = () => {
-        getByGender(isGender)
+        getByGender(isGender.gender)
         console.log('isGender - ', isGender)
         navigation.navigate('Main List')
     }
