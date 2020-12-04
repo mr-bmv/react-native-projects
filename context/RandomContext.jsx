@@ -43,6 +43,11 @@ const RandomProvider = ({ children }) => {
         }
     }
 
+    const filterPeople = async (filterList) => {
+        const response = await service.getPeople(filterList);
+        dispatch({ type: GET_USERS, payload: response })
+    }
+
     const setLoading = () => {
         dispatch({ type: SET_LOADING })
     }
@@ -52,7 +57,8 @@ const RandomProvider = ({ children }) => {
             {
                 state,
                 getUsers,
-                getByGender
+                getByGender,
+                filterPeople
             }}
         >
             { children}
