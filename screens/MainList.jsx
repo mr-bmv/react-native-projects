@@ -5,11 +5,11 @@ import { useRandomContext } from '../context/RandomContext'
 
 const MainList = ({ navigation }) => {
 
-  const { state, getUsers } = useRandomContext();
+  const { state, getUsers, filterPeople } = useRandomContext();
 
   useEffect(() => {
     let cancelled = false;
-    getUsers()
+    filterPeople()
     return () => cancelled = true
   }, [])
 

@@ -46,23 +46,27 @@ export default class RandomService {
 
   getPeople = async (filter) => {
 
-    const mode = {
-      male: filter.gender.male ? '&gender=male' : false,
-      female: filter.gender.female ? '&gender=female' : false,
-      nationality: filter.nat ? `&nat=${filter.nat}` : false,
+    let requestString = '';
+
+    if (filter) {
+      const mode = {
+        male: filter.gender.male ? '&gender=male' : false,
+        female: filter.gender.female ? '&gender=female' : false,
+        nationality: filter.nat ? `&nat=${filter.nat}` : false,
+      }
+
+      console.log("MODE - ", mode)
+
+      requestString = Object.keys(mode)
+        .reduce((baseStr, key) => {
+          if (mode[key]) {
+            return baseStr + mode[key]
+          }
+          return baseStr;
+        }, "")
+
+      console.log("requestString - ", requestString)
     }
-
-    console.log("MODE - ", mode)
-
-    const requestString = Object.keys(mode)
-      .reduce((baseStr, key) => {
-        if (mode[key]) {
-          return baseStr + mode[key]
-        }
-        return baseStr;
-      }, "")
-
-    console.log("requestString - ", requestString)
 
     const res = await this.getResource(requestString)
 
