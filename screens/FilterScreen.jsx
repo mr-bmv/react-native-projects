@@ -1,8 +1,12 @@
-import React from 'react'
-import { View, Text, Button, StyleSheet } from 'react-native'
+import React from 'react';
+import { View, Text, Button, StyleSheet } from 'react-native';
 import CheckBox from '@react-native-community/checkbox';
 import { useRandomContext } from '../context/RandomContext';
 import { Picker } from '@react-native-picker/picker';
+import { nationality } from "../assets/mapping";
+
+//  components
+import PickerNationalityList from '../components/PickerNationalityList';
 
 const FilterScreen = ({ navigation }) => {
     const [isGender, setGender] = React.useState({
@@ -17,12 +21,10 @@ const FilterScreen = ({ navigation }) => {
     }
 
     const onNationality = (nat) => {
-        setGender((isSelected) => ({ ...isSelected, nat }))
-        console.log(isGender)
+        setGender((state) => ({ ...state, nat }))
     }
 
     const postFilterList = () => {
-        console.log('Data from filter - ', isGender)
         filterPeople(isGender)
         navigation.navigate('Main List')
     }
@@ -47,28 +49,7 @@ const FilterScreen = ({ navigation }) => {
                 <Text>Female</Text>
             </View>
 
-            <Picker
-                selectedValue={isGender.nat}
-                style={{ height: 50, width: 100 }}
-                onValueChange={(nationality) => onNationality(nationality)}>
-                <Picker.Item label="Australia" value="au" />
-                <Picker.Item label="Brazil" value="BR" />
-                <Picker.Item label="Canada" value="CA" />
-                <Picker.Item label="Denmark" value="DK" />
-                <Picker.Item label="Finland" value="FI" />
-                <Picker.Item label="France" value="FR" />
-                <Picker.Item label="Germany" value="DE" />
-                <Picker.Item label="Ireland" value="IE" />
-                <Picker.Item label="Iran" value="IR" />
-                <Picker.Item label="Norway" value="NO" />
-                <Picker.Item label="Netherlands" value="NL" />
-                <Picker.Item label="New Zealand" value="NZ" />
-                <Picker.Item label="Spain" value="ES" />
-                <Picker.Item label="Switzerland" value="CH" />
-                <Picker.Item label="Turkey" value="TR" />
-                <Picker.Item label="United Kingdom" value="GB" />
-                <Picker.Item label="United States of America" value="US" />
-            </Picker>
+            <PickerNationalityList onNationality={onNationality} nat={isGender.nat} />
             <Button title="Filter List" onPress={postFilterList} />
         </ View>
     );
@@ -77,7 +58,7 @@ const FilterScreen = ({ navigation }) => {
 const styles = StyleSheet.create({
     container: {
         flex: 1,
-        backgroundColor: 'grey',
+        // backgroundColor: 'grey',
         justifyContent: 'center',
         marginLeft: 80,
         marginRight: 80,
