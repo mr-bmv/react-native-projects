@@ -13,8 +13,6 @@ const MainList = ({ navigation }) => {
     return () => cancelled = true
   }, [])
 
-  console.log(state)
-
   const renderItem = ({ item }) => (
     <View style={styles.list}>
       <TouchableOpacity onPress={() => { navigation.navigate('Profile', { item }) }}>
@@ -42,7 +40,7 @@ const MainList = ({ navigation }) => {
     <View style={{ flex: 1, backgroundColor }}>
       <View style={{ flexDirection: 'row', justifyContent: 'space-around', padding: 5 }}>
         <Button title="All" onPress={() => { filterPeople() }} />
-        <Button title="Filer" onPress={() => { navigation.navigate('Filter') }} />
+        <Button title="Filter" onPress={() => { navigation.navigate('Filter') }} />
         <Switch
           trackColor={{ false: "#767577", true: "#81b0ff" }}
           thumbColor={state.darkTheme ? "#f5dd4b" : "#f4f3f4"}
