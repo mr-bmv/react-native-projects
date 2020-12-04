@@ -1,17 +1,19 @@
-import React, { useEffect } from 'react';
-import { FlatList, StyleSheet, Text, View, ScrollView, Image, TouchableOpacity, Button } from 'react-native';
+import React, { useEffect, useState } from 'react';
+import { FlatList, StyleSheet, Text, View, Switch, Image, TouchableOpacity, Button } from 'react-native';
 
 import { useRandomContext } from '../context/RandomContext'
 
 const MainList = ({ navigation }) => {
 
-  const { state, getUsers, filterPeople } = useRandomContext();
+  const { state, filterPeople, changeTheme } = useRandomContext();
 
   useEffect(() => {
     let cancelled = false;
     filterPeople()
     return () => cancelled = true
   }, [])
+
+  console.log(state)
 
   const renderItem = ({ item }) => (
     <View style={styles.list}>
@@ -34,12 +36,20 @@ const MainList = ({ navigation }) => {
       </View>
     )
   }
+
+  const backgroundColor = state.darkTheme ? 'black' : 'white'
   return (
-    <View >
+    <View style={{ flex: 1, backgroundColor }}>
       <View style={{ flexDirection: 'row', justifyContent: 'space-around', padding: 5 }}>
-        <Button title="All" onPress={() => { }} />
+        <Button title="All" onPress={() => { filterPeople() }} />
         <Button title="Filer" onPress={() => { navigation.navigate('Filter') }} />
-        <Button title="Dark" onPress={() => { }} />
+        <Switch
+          trackColor={{ false: "#767577", true: "#81b0ff" }}
+          thumbColor={state.darkTheme ? "#f5dd4b" : "#f4f3f4"}
+          ios_backgroundColor="#3e3e3e"
+          onValueChange={changeTheme}
+          value={state.darkTheme}
+        />
       </View>
 
       <FlatList
@@ -57,7 +67,7 @@ const styles = StyleSheet.create({
   list: {
     flex: 1,
     flexDirection: 'column',
-    backgroundColor: '#fff',
+    // backgroundColor: `#fff`,
     alignItems: 'center',
     justifyContent: 'center',
     fontSize: 40

@@ -49,13 +49,13 @@ export default App = () => {
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    backgroundColor: '#ccc',
+    // backgroundColor: '#ccc',
     paddingTop: Constants.statusBarHeight,
   },
   list: {
     flex: 1,
     flexDirection: 'column',
-    backgroundColor: '#fff',
+    // backgroundColor: '#fff',
     alignItems: 'center',
     justifyContent: 'center',
     fontSize: 40

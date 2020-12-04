@@ -1,5 +1,5 @@
 import React, { useContext, useState, useReducer } from 'react'
-import { GET_USERS, SET_LOADING } from '../actionTypes/randomTypes';
+import { GET_USERS, SET_LOADING, CHANGE_THEME } from '../actionTypes/randomTypes';
 import { RandomReducer } from '../reducers/RandomReducer';
 import RandomService from '../services/random-person-service'
 
@@ -15,7 +15,8 @@ const RandomProvider = ({ children }) => {
 
     const initialState = {
         users: [],
-        loading: false
+        loading: false,
+        darkTheme: false
     }
 
     const [state, dispatch] = useReducer(RandomReducer, initialState)
@@ -30,11 +31,8 @@ const RandomProvider = ({ children }) => {
     const getByGender = async (genderList) => {
         setLoading();
 
-        console.log('genderList - ', genderList)
-
         if ((genderList.male && genderList.female)
             || (!genderList.male && !genderList.female)) {
-            console.log('Should be all users')
             getUsers();
         } else {
             const response = await service.getGender(genderList);
@@ -52,13 +50,18 @@ const RandomProvider = ({ children }) => {
         dispatch({ type: SET_LOADING })
     }
 
+    const changeTheme = () => {
+        dispatch({ type: CHANGE_THEME })
+    }
+
     return (
         <RandomContext.Provider value={
             {
                 state,
                 getUsers,
                 getByGender,
-                filterPeople
+                filterPeople,
+                changeTheme
             }}
         >
             { children}
