@@ -27,43 +27,30 @@ const RandomProvider = ({ children }) => {
         const response = await service.getNationality();
 
         dispatch({ type: GET_USERS, payload: response })
-    }
-
-    const getByGender = async (genderList) => {
-        setLoading();
-
-        if ((genderList.male && genderList.female)
-            || (!genderList.male && !genderList.female)) {
-            getUsers();
-        } else {
-            const response = await service.getGender(genderList);
-            dispatch({ type: GET_USERS, payload: response })
-        }
-    }
+    };
 
     const filterPeople = async (filterList = '') => {
         try {
             const response = await service.getPeople(filterList);
             dispatch({ type: GET_USERS, payload: response })
         } catch (error) {
-            dispatch({ type: FETCH_PEOPLE_FAILURE })
+            dispatch({ type: FETCH_PEOPLE_FAILURE, payload: error })
         }
-    }
+    };
 
     const setLoading = () => {
         dispatch({ type: SET_LOADING })
-    }
+    };
 
     const changeTheme = () => {
         dispatch({ type: CHANGE_THEME })
-    }
+    };
 
     return (
-        <RandomContext.Provider value={
-            {
+        <RandomContext.Provider
+            value={{
                 state,
                 getUsers,
-                getByGender,
                 filterPeople,
                 changeTheme
             }}
