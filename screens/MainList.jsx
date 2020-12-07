@@ -33,21 +33,28 @@ const MainList = ({ navigation }) => {
         <Text style={styles.spinner}>Loading</Text>
       </View>
     )
-  }
+  };
 
-  const backgroundColor = state.darkTheme ? 'black' : 'white'
+  const emoji = state.darkTheme ? '☀️' : '🌘';
+
+  const backgroundColor = state.darkTheme ? 'black' : 'white';
+
   return (
     <View style={{ flex: 1, backgroundColor }}>
       <View style={{ flexDirection: 'row', justifyContent: 'space-around', padding: 5 }}>
         <Button title="All" onPress={() => { filterPeople() }} />
         <Button title="Filter" onPress={() => { navigation.navigate('Filter') }} />
-        <Switch
-          trackColor={{ false: "#767577", true: "#81b0ff" }}
-          thumbColor={state.darkTheme ? "#f5dd4b" : "#f4f3f4"}
-          ios_backgroundColor="#3e3e3e"
-          onValueChange={changeTheme}
-          value={state.darkTheme}
-        />
+        <View style={{ flexDirection: 'row' }}>
+        <Text style={{paddingTop: 7}}>☀️</Text>
+          <Switch
+            trackColor={{ false: "#767577", true: "#81b0ff" }}
+            thumbColor={state.darkTheme ? "#f5dd4b" : "#f4f3f4"}
+            ios_backgroundColor="#3e3e3e"
+            onValueChange={changeTheme}
+            value={state.darkTheme}
+          />
+          <Text style={{paddingTop: 7}}>🌘</Text>
+        </View>
       </View>
 
       <FlatList

@@ -14,7 +14,9 @@ const FilterScreen = ({ navigation }) => {
         nat: false
     });
 
-    const { filterPeople } = useRandomContext();
+    const { state, filterPeople } = useRandomContext();
+
+    const backgroundColor = state.darkTheme ? 'black' : 'white';
 
     const onFilter = (gender) => {
         setGender((isSelected) => ({ ...isSelected, gender: { ...isSelected.gender, [gender]: !isSelected[gender] } }))
@@ -30,35 +32,38 @@ const FilterScreen = ({ navigation }) => {
     }
 
     return (
-        < View style={styles.container} >
-            <View style={styles.checkboxContainer}>
-                <CheckBox
-                    disabled={false}
-                    value={isGender.male}
-                    onValueChange={() => onFilter('male')}
-                />
-                <Text>Male</Text>
-            </View>
+        <View style={{ flex: 1, backgroundColor }}>
+            < View style={styles.container} >
+                <View style={styles.checkboxContainer}>
+                    <CheckBox
+                        disabled={false}
+                        value={isGender.male}
+                        onValueChange={() => onFilter('male')}
+                    />
+                    <Text>Male</Text>
+                </View>
 
-            <View style={styles.checkboxContainer}>
-                <CheckBox
-                    disabled={false}
-                    value={isGender.female}
-                    onValueChange={() => onFilter('female')}
-                />
-                <Text>Female</Text>
-            </View>
+                <View style={styles.checkboxContainer}>
+                    <CheckBox
+                        disabled={false}
+                        value={isGender.female}
+                        onValueChange={() => onFilter('female')}
+                    />
+                    <Text>Female</Text>
+                </View>
 
-            <PickerNationalityList onNationality={onNationality} nat={isGender.nat} />
-            <Button title="Filter List" onPress={postFilterList} />
-        </ View>
+                <PickerNationalityList onNationality={onNationality} nat={isGender.nat} />
+                <Button title="Filter List" onPress={postFilterList} />
+            </ View>
+        </View>
+
     );
 }
 
 const styles = StyleSheet.create({
     container: {
         flex: 1,
-        // backgroundColor: 'grey',
+        backgroundColor: 'grey',
         justifyContent: 'center',
         marginLeft: 80,
         marginRight: 80,
