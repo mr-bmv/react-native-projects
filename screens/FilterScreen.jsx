@@ -60,8 +60,12 @@ const FilterScreen = ({ navigation }) => {
             <Text style={styles.checkBoxText}>Female</Text>
           </Pressable>
         </View>
-
-        <PickerNationalityList onNationality={onNationality} nat={isGender.nat} />
+        {/* Picker */}
+        <View>
+          <Text style={styles.pickerText}>Nationality</Text>
+          <PickerNationalityList onNationality={onNationality} nat={isGender.nat} />
+        </View>
+        {/* Submit Button */}
         <Pressable
           style={styles.button}
           onPress={postFilterList}
@@ -124,7 +128,12 @@ const styles = StyleSheet.create({
     fontSize: 36,
     color: "#FFF"
   },
-
+  pickerText: {
+    color: COLORS.dark.mainText,
+    fontSize: 16,
+    marginHorizontal: 20,
+    marginBottom:5
+  }
 });
 
 

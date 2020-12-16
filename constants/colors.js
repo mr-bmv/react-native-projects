@@ -13,6 +13,7 @@ export const COLORS = {
         backgroundColor: "#002b36",
         backgroundColorLight: "#073642",
         mainText: "#839496",
+        input: "#a9bdbd"
     },
     light: {}
 };

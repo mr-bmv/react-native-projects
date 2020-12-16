@@ -1,6 +1,8 @@
 import React from 'react'
+import { View, Text, Button, StyleSheet, Pressable } from 'react-native';
 import { Picker } from '@react-native-picker/picker';
 import { nationality } from "../assets/mapping"
+import { COLORS } from '../constants/colors';
 
 const PickerNationalityList = ({ onNationality, nat }) => {
 
@@ -14,11 +16,19 @@ const PickerNationalityList = ({ onNationality, nat }) => {
     return (
         <Picker
             selectedValue={nat}
-            style={{ height: 50 }}
-            onValueChange={(nationality) => onNationality(nationality)}>
+            style={styles.container}
+            onValueChange={(nationality) => onNationality(nationality)}
+        >
             {natList}
         </Picker>
     )
 };
+
+const styles = StyleSheet.create({
+    container: {
+        backgroundColor: COLORS.dark.input,
+        marginHorizontal: 20,
+    },
+})
 
 export default PickerNationalityList;

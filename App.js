@@ -32,9 +32,9 @@ export default App = () => {
   return (
     <RandomProvider>
       <StatusBar hidden={true} />
-      <NavigationContainer>
+      {/* <NavigationContainer>
         <Stack.Navigator initialRouteName="Main List">
-          {/* Tabs */}
+          Tabs
           <Stack.Screen name="HomeTab" component={Tabs} />
 
           <Stack.Screen name="Main List" component={MainList} />
@@ -43,10 +43,10 @@ export default App = () => {
 
           <Stack.Screen name="TabScreen" component={TabScreen} />
           <Stack.Screen name="Filter" component={FilterScreen} />
-          {/* <Stack.Screen name="Details" component={DetailsScreen} /> */}
-        </Stack.Navigator>
-        {/* <FilterScreen /> */}
-      </NavigationContainer>
+          <Stack.Screen name="Details" component={DetailsScreen} />
+        </Stack.Navigator> */}
+        <FilterScreen />
+      {/* </NavigationContainer> */}
     </RandomProvider>
   );
 }
