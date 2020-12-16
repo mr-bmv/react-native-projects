@@ -1,5 +1,5 @@
 export default class RandomService {
-  _apiBase = 'https://randomuser.me/api/?results=33';
+  _apiBase = 'https://randomuser.me/api/?results=50';
 
   getResource = async (url) => {
     const res = await fetch(`${this._apiBase}${url}`);
@@ -11,7 +11,7 @@ export default class RandomService {
     return await res.json();
   };
 
-  /** 
+  /**
    * @param {string} gender - enumerator: male, female
    */
   getGender = async (gender) => {
@@ -23,7 +23,7 @@ export default class RandomService {
   }
 
   /**
-   * 
+   *
    * @param {string} nat - enumerator : AU, BR, CA, CH, DE, DK, ES, FI, FR, GB, IE, IR, NO, NL, NZ, TR, US
    */
   getNationality = async (nat = 'US') => {
@@ -33,7 +33,7 @@ export default class RandomService {
   }
 
   /**
-   * 
+   *
    * @param {string} gender - enumerator: male, female
    * @param {string} nat - enumerator : AU, BR, CA, CH, DE, DK, ES, FI, FR, GB, IE, IR, NO, NL, NZ, TR, US
    */
@@ -75,7 +75,8 @@ export default class RandomService {
   _transformPerson = (person) => {
     return {
       id: `${person.login.uuid}`,
-      name: `${person.name.title}. ${person.name.first} ${person.name.last}`,
+      name: `${person.name.first} ${person.name.last}`,
+      title: person.name.title,
       age: person.dob.age,
       phone: person.cell,
       email: person.email,

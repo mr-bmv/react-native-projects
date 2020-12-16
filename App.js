@@ -10,6 +10,8 @@ import Profile from './screens/Profile';
 import MainList from './screens/MainList';
 import SecondScreen, { TabScreen } from './screens/SecondScreen';
 import FilterScreen from './screens/FilterScreen'
+import { StatusBar } from 'expo-status-bar';
+import Tabs from './navigation/tabs'
 
 const Stack = createStackNavigator();
 
@@ -28,21 +30,24 @@ function HomeScreen({ navigation }) {
 export default App = () => {
 
   return (
-    <View style={styles.container}>
-      <RandomProvider>
-        <NavigationContainer>
-          <Stack.Navigator initialRouteName="Main List">
-            <Stack.Screen name="Main List" component={MainList} />
-            <Stack.Screen name="Profile" component={Profile} options={{ title: 'Person Details' }} />
-            <Stack.Screen name="SecondScreen" component={SecondScreen} />
+    <RandomProvider>
+      <StatusBar hidden={true} />
+      <NavigationContainer>
+        <Stack.Navigator initialRouteName="Main List">
+          {/* Tabs */}
+          <Stack.Screen name="HomeTab" component={Tabs} />
 
-            <Stack.Screen name="TabScreen" component={TabScreen} />
-            <Stack.Screen name="Filter" component={FilterScreen} />
-            {/* <Stack.Screen name="Details" component={DetailsScreen} /> */}
-          </Stack.Navigator>
-        </NavigationContainer>
-      </RandomProvider>
-    </View>
+          <Stack.Screen name="Main List" component={MainList} />
+          <Stack.Screen name="Profile" component={Profile} options={{ title: 'Person Details' }} />
+          <Stack.Screen name="SecondScreen" component={SecondScreen} />
+
+          <Stack.Screen name="TabScreen" component={TabScreen} />
+          <Stack.Screen name="Filter" component={FilterScreen} />
+          {/* <Stack.Screen name="Details" component={DetailsScreen} /> */}
+        </Stack.Navigator>
+        {/* <FilterScreen /> */}
+      </NavigationContainer>
+    </RandomProvider>
   );
 }
 
