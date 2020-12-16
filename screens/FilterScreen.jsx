@@ -1,12 +1,13 @@
 import React from 'react';
-import { View, Text, Button, StyleSheet } from 'react-native';
-import CheckBox from '@react-native-community/checkbox';
+import { View, Text, Button, StyleSheet, Pressable } from 'react-native';
+import { FontAwesome, FontAwesome5, Ionicons } from '@expo/vector-icons';
 import { useRandomContext } from '../context/RandomContext';
 import { Picker } from '@react-native-picker/picker';
 import { nationality } from "../assets/mapping";
 
 //  components
 import PickerNationalityList from '../components/PickerNationalityList';
+import { COLORS, width } from '../constants/colors';
 
 const FilterScreen = ({ navigation }) => {
   const [isGender, setGender] = React.useState({
@@ -32,30 +33,43 @@ const FilterScreen = ({ navigation }) => {
   }
 
   return (
-    <View style={{ flex: 1, backgroundColor }}>
-      < View style={styles.container} >
-        <View style={styles.checkboxContainer}>
-          <CheckBox
-            disabled={false}
-            value={isGender.gender.male}
-            onValueChange={() => onFilter('male')}
-          />
-          <Text>Male</Text>
-        </View>
+    <View style={styles.container} >
+      < View style={styles.frame} >
+        <View style={styles.genderFrame}>
+          <Pressable
+            style={styles.checkBox}
+            onPress={() => onFilter('male')}
+          >
+            {
+              isGender.gender.male ?
+                <Ionicons name="square" size={36} color={COLORS.dark.primary} /> :
+                <Ionicons name="square-outline" size={36} color={COLORS.dark.primary} />
+            }
+            <Text style={styles.checkBoxText}>Male</Text>
+          </Pressable>
 
-        <View style={styles.checkboxContainer}>
-          <CheckBox
-            disabled={false}
-            value={isGender.gender.female}
-            onValueChange={() => onFilter('female')}
-          />
-          <Text>Female</Text>
+          <Pressable
+            style={styles.checkBox}
+            onPress={() => onFilter('female')}
+          >
+            {
+              isGender.gender.female ?
+                <Ionicons name="square" size={36} color={COLORS.dark.primary} /> :
+                <Ionicons name="square-outline" size={36} color={COLORS.dark.primary} />
+            }
+            <Text style={styles.checkBoxText}>Female</Text>
+          </Pressable>
         </View>
 
         <PickerNationalityList onNationality={onNationality} nat={isGender.nat} />
-        <Button title="Filter List" onPress={postFilterList} />
+        <Pressable
+          style={styles.button}
+          onPress={postFilterList}
+        >
+          <Text style={styles.buttonText}>Submit</Text>
+        </Pressable>
       </ View>
-    </View>
+    </View >
 
   );
 }
@@ -63,12 +77,21 @@ const FilterScreen = ({ navigation }) => {
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    backgroundColor: 'grey',
-    justifyContent: 'center',
-    marginLeft: 80,
-    marginRight: 80,
-    marginBottom: 200,
-    margin: 200
+    backgroundColor: COLORS.dark.backgroundColor,
+    alignItems: "center",
+    justifyContent: "center",
+  },
+  frame: {
+    backgroundColor: COLORS.dark.backgroundColorLight,
+    justifyContent: "space-between",
+    width: width - 30,
+    height: 400,
+    borderRadius: 20
+  },
+  genderFrame: {
+    flexDirection: "row",
+    justifyContent: "space-around",
+    marginTop: 50,
   },
   checkboxContainer: {
     flexDirection: "row",
@@ -76,12 +99,32 @@ const styles = StyleSheet.create({
     justifyContent: 'flex-start',
     alignItems: 'center',
   },
-  checkbox: {
-    alignSelf: "center",
+  checkBox: {
+    flexDirection: 'row',
+    alignItems: "center"
+  },
+  checkBoxText: {
+    color: COLORS.dark.mainText,
+    fontSize: 22,
+    marginLeft: 8,
+
   },
   label: {
     margin: 8,
   },
+  button: {
+    backgroundColor: COLORS.dark.primary,
+    paddingVertical: 5,
+    margin: 20,
+    borderRadius: 10,
+    justifyContent: "center",
+    alignItems: "center"
+  },
+  buttonText: {
+    fontSize: 36,
+    color: "#FFF"
+  },
+
 });
 
 
