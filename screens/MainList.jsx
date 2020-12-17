@@ -1,12 +1,12 @@
 import React, { useEffect, useState } from 'react';
 import { FlatList, StyleSheet, Text, View, Switch, Image, TouchableOpacity, Button, Pressable } from 'react-native';
-import { COLORS, width } from '../constants/colors';
+import { width } from '../constants/colors';
 
 import { useRandomContext } from '../context/RandomContext'
 
 const MainList = ({ navigation }) => {
 
-  const { state, filterPeople, changeTheme } = useRandomContext();
+  const { state, filterPeople, changeTheme, theme } = useRandomContext();
 
   useEffect(() => {
     let cancelled = false;
@@ -16,7 +16,7 @@ const MainList = ({ navigation }) => {
 
   const renderItem = ({ item }) => (
     <TouchableOpacity
-      style={styles.card}
+      style={[styles.card, { backgroundColor: theme.backgroundColorLight }]}
       onPress={() => { navigation.navigate('Profile', { item }) }}>
       <Image
         style={styles.image}
@@ -24,7 +24,7 @@ const MainList = ({ navigation }) => {
           uri: `${item.img.large}`,
         }}
       />
-      <Text style={styles.text}>{item.name}</Text>
+      <Text style={[styles.text, { color: theme.mainText, }]}>{item.name}</Text>
     </TouchableOpacity>
   );
 
@@ -38,21 +38,18 @@ const MainList = ({ navigation }) => {
 
   const emoji = state.darkTheme ? '☀️' : '🌘';
 
-  const mode = state.darkTheme ? 'dark' : 'light';
-  // const mode = true ? 'dark' : 'light';
-
   return (
-    <View style={styles.container}>
+    <View style={{ backgroundColor: theme.backgroundColor }}>
       {/* Filter Panel */}
-      <View style={styles.filterPanel}>
+      <View style={[styles.filterPanel, { backgroundColor: theme.navbar }]}>
         <Pressable
           onPress={() => { filterPeople() }}
-          style={styles.button}>
+          style={[styles.button, { backgroundColor: theme.primary, }]}>
           <Text style={{ color: "white", fontSize: 20, }}>All</Text>
         </Pressable>
         <Pressable
           onPress={() => { navigation.navigate('Filter') }}
-          style={styles.button}>
+          style={[styles.button, { backgroundColor: theme.primary, }]}>
           <Text style={{ color: "white", fontSize: 20 }}>Filter</Text>
         </Pressable>
         <View style={{ flexDirection: 'row' }}>
@@ -77,27 +74,21 @@ const MainList = ({ navigation }) => {
           keyExtractor={item => item.id}
         />
       </View>
-    </View>
+    </View >
   );
 };
 
 export default MainList;
 
 const styles = StyleSheet.create({
-  container: {
-    backgroundColor: COLORS.dark.backgroundColor,
-  },
   filterPanel: {
     flexDirection: 'row',
-    backgroundColor: COLORS.dark.backgroundColorLight,
     justifyContent: 'space-around',
     paddingVertical: 10
   },
   button: {
-    backgroundColor: COLORS.dark.primary,
     borderRadius: 10,
     paddingHorizontal: 20,
-    // width: 60,
     height: 40,
     justifyContent: "center",
     alignItems: "center"
@@ -105,7 +96,6 @@ const styles = StyleSheet.create({
   card: {
     width: width - 30,
     height: 100,
-    backgroundColor: COLORS.dark.backgroundColorLight,
     margin: 8,
     flexDirection: "row",
     alignItems: "center",
@@ -115,9 +105,7 @@ const styles = StyleSheet.create({
     flex: 1,
     width: width,
     flexDirection: 'row',
-    // backgroundColor: COLORS.backgroundColorLight,
     alignItems: 'center',
-    // justifyContent: 'center',
     fontSize: 40,
   },
   image: {
@@ -126,17 +114,12 @@ const styles = StyleSheet.create({
     marginLeft: 10,
     borderRadius: 13
   },
-  load: {
-    backgroundColor: 'tomato'
-  },
   spinner: {
     flex: 1,
     alignItems: 'center',
     justifyContent: 'center',
-
   },
   text: {
-    color: COLORS.dark.mainText,
     fontSize: 18,
     marginLeft: 10
   }

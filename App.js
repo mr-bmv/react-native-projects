@@ -1,7 +1,7 @@
 import React from 'react';
 import { StyleSheet, View, Text, Button } from 'react-native';
 import Constants from 'expo-constants';
-import { NavigationContainer } from '@react-navigation/native';
+import { DefaultTheme, NavigationContainer } from '@react-navigation/native';
 import { createStackNavigator } from '@react-navigation/stack';
 
 import RandomProvider from './context/RandomContext'
@@ -12,6 +12,7 @@ import SecondScreen, { TabScreen } from './screens/SecondScreen';
 import FilterScreen from './screens/FilterScreen'
 import { StatusBar } from 'expo-status-bar';
 import Tabs from './navigation/tabs'
+import EStyleSheet from 'react-native-extended-stylesheet';
 
 const Stack = createStackNavigator();
 
@@ -28,13 +29,30 @@ function HomeScreen({ navigation }) {
 }
 
 export default App = () => {
-
   return (
     <RandomProvider>
+      <Router />
+    </RandomProvider>
+  );
+};
+
+// build extended stylesheets with global variables
+EStyleSheet.build({
+  $fontColor: 'green',
+  $bgColor: '#002b36',
+  $bgColorL: '#fff',
+  $rem: 16,
+  $colorOfFont: '#2aa198',
+});
+
+const Router = () => {
+
+  return (
+    <>
       <StatusBar hidden={true} />
-      {/* <NavigationContainer>
+      <NavigationContainer  >
         <Stack.Navigator initialRouteName="Main List">
-          Tabs
+          {/* Tabs */}
           <Stack.Screen name="HomeTab" component={Tabs} />
 
           <Stack.Screen name="Main List" component={MainList} />
@@ -43,12 +61,12 @@ export default App = () => {
 
           <Stack.Screen name="TabScreen" component={TabScreen} />
           <Stack.Screen name="Filter" component={FilterScreen} />
-          <Stack.Screen name="Details" component={DetailsScreen} />
-        </Stack.Navigator> */}
-        <FilterScreen />
-      {/* </NavigationContainer> */}
-    </RandomProvider>
-  );
+          {/* <Stack.Screen name="Details" component={DetailsScreen} /> */}
+        </Stack.Navigator>
+        {/* <FilterScreen /> */}
+      </NavigationContainer>
+    </>
+  )
 }
 
 const styles = StyleSheet.create({

@@ -2,6 +2,7 @@ import React, { useContext, useState, useReducer } from 'react'
 import { GET_USERS, SET_LOADING, CHANGE_THEME, FETCH_PEOPLE_FAILURE } from '../actionTypes/randomTypes';
 import { RandomReducer } from '../reducers/RandomReducer';
 import RandomService from '../services/random-person-service'
+import { COLORS } from '../constants/colors';
 
 const service = new RandomService();
 
@@ -46,13 +47,16 @@ const RandomProvider = ({ children }) => {
         dispatch({ type: CHANGE_THEME })
     };
 
+    const theme = state.darkTheme ? COLORS.dark : COLORS.light;
+
     return (
         <RandomContext.Provider
             value={{
                 state,
                 getUsers,
                 filterPeople,
-                changeTheme
+                changeTheme,
+                theme
             }}
         >
             { children}

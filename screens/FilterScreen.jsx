@@ -15,7 +15,7 @@ const FilterScreen = ({ navigation }) => {
     nat: false
   });
 
-  const { state, filterPeople } = useRandomContext();
+  const { state, filterPeople, theme } = useRandomContext();
 
   const backgroundColor = state.darkTheme ? 'black' : 'white';
 
@@ -33,8 +33,8 @@ const FilterScreen = ({ navigation }) => {
   }
 
   return (
-    <View style={styles.container} >
-      < View style={styles.frame} >
+    <View style={[styles.container, { backgroundColor: theme.backgroundColor, }]} >
+      < View style={[styles.frame, { backgroundColor: theme.backgroundColorLight }]} >
         <View style={styles.genderFrame}>
           <Pressable
             style={styles.checkBox}
@@ -45,7 +45,7 @@ const FilterScreen = ({ navigation }) => {
                 <Ionicons name="square" size={36} color={COLORS.dark.primary} /> :
                 <Ionicons name="square-outline" size={36} color={COLORS.dark.primary} />
             }
-            <Text style={styles.checkBoxText}>Male</Text>
+            <Text style={[styles.checkBoxText, { color: theme.mainText, }]}>Male</Text>
           </Pressable>
 
           <Pressable
@@ -57,17 +57,17 @@ const FilterScreen = ({ navigation }) => {
                 <Ionicons name="square" size={36} color={COLORS.dark.primary} /> :
                 <Ionicons name="square-outline" size={36} color={COLORS.dark.primary} />
             }
-            <Text style={styles.checkBoxText}>Female</Text>
+            <Text style={[styles.checkBoxText, { color: theme.mainText, }]}>Female</Text>
           </Pressable>
         </View>
         {/* Picker */}
         <View>
-          <Text style={styles.pickerText}>Nationality</Text>
+          <Text style={[styles.pickerText, { color: theme.mainText, }]}>Nationality</Text>
           <PickerNationalityList onNationality={onNationality} nat={isGender.nat} />
         </View>
         {/* Submit Button */}
         <Pressable
-          style={styles.button}
+          style={[styles.button, { backgroundColor: theme.primary, }]}
           onPress={postFilterList}
         >
           <Text style={styles.buttonText}>Submit</Text>
@@ -81,12 +81,10 @@ const FilterScreen = ({ navigation }) => {
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    backgroundColor: COLORS.dark.backgroundColor,
     alignItems: "center",
     justifyContent: "center",
   },
   frame: {
-    backgroundColor: COLORS.dark.backgroundColorLight,
     justifyContent: "space-between",
     width: width - 30,
     height: 400,
@@ -108,16 +106,13 @@ const styles = StyleSheet.create({
     alignItems: "center"
   },
   checkBoxText: {
-    color: COLORS.dark.mainText,
     fontSize: 22,
     marginLeft: 8,
-
   },
   label: {
     margin: 8,
   },
   button: {
-    backgroundColor: COLORS.dark.primary,
     paddingVertical: 5,
     margin: 20,
     borderRadius: 10,
@@ -129,10 +124,9 @@ const styles = StyleSheet.create({
     color: "#FFF"
   },
   pickerText: {
-    color: COLORS.dark.mainText,
     fontSize: 16,
     marginHorizontal: 20,
-    marginBottom:5
+    marginBottom: 5
   }
 });
 

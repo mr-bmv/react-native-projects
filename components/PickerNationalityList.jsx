@@ -3,8 +3,11 @@ import { View, Text, Button, StyleSheet, Pressable } from 'react-native';
 import { Picker } from '@react-native-picker/picker';
 import { nationality } from "../assets/mapping"
 import { COLORS } from '../constants/colors';
+import { useRandomContext } from '../context/RandomContext';
 
 const PickerNationalityList = ({ onNationality, nat }) => {
+
+    const { theme } = useRandomContext();
 
     const natList = Object.keys(nationality).map(key => {
         return (
@@ -16,7 +19,7 @@ const PickerNationalityList = ({ onNationality, nat }) => {
     return (
         <Picker
             selectedValue={nat}
-            style={styles.container}
+            style={[styles.container, { backgroundColor: theme.input, }]}
             onValueChange={(nationality) => onNationality(nationality)}
         >
             {natList}
@@ -26,7 +29,6 @@ const PickerNationalityList = ({ onNationality, nat }) => {
 
 const styles = StyleSheet.create({
     container: {
-        backgroundColor: COLORS.dark.input,
         marginHorizontal: 20,
     },
 })
