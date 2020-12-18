@@ -56,11 +56,11 @@ const Router = () => {
           {/* Tabs */}
           <Stack.Screen name="HomeTab" component={Tabs} />
 
-          <Stack.Screen name="Main List" component={MainListScreen} />
+          {/* <Stack.Screen name="Main List" component={MainListScreen} /> */}
           <Stack.Screen name="Profile" component={Profile} options={{ title: 'Person Details' }} />
           <Stack.Screen name="SecondScreen" component={SecondScreen} />
 
-          <Stack.Screen name="TabScreen" component={TabScreen} />
+          {/* <Stack.Screen name="TabScreen" component={TabScreen} /> */}
           <Stack.Screen name="Filter" component={FilterScreen} />
           {/* <Stack.Screen name="Details" component={DetailsScreen} /> */}
         </Stack.Navigator>

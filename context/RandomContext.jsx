@@ -17,7 +17,7 @@ const RandomProvider = ({ children }) => {
     const initialState = {
         users: [],
         loading: false,
-        darkTheme: false,
+        darkTheme: true,
         error: false
     }
 

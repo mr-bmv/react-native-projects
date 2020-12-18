@@ -28,7 +28,14 @@ const FilterScreen = ({ navigation }) => {
 
   const postFilterList = () => {
     filterPeople(isGender)
-    navigation.navigate('Main List')
+    navigation.navigate('HomeTab', {
+      screen: 'List',
+      // params: {
+      //   screen: 'SearchResults',
+      // },
+    })
+
+
   }
 
   return (
@@ -68,6 +75,7 @@ const FilterScreen = ({ navigation }) => {
         <Pressable
           style={[styles.button, { backgroundColor: theme.primary, }]}
           onPress={postFilterList}
+
         >
           <Text style={styles.buttonText}>Submit</Text>
         </Pressable>

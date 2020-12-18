@@ -36,8 +36,6 @@ const MainListScreen = ({ navigation }) => {
     )
   };
 
-  const emoji = state.darkTheme ? '☀️' : '🌘';
-
   return (
     <View style={{ backgroundColor: theme.backgroundColor }}>
       {/* Filter Panel */}
@@ -53,15 +51,15 @@ const MainListScreen = ({ navigation }) => {
           <Text style={{ color: "white", fontSize: 20 }}>Filter</Text>
         </Pressable>
         <View style={{ flexDirection: 'row' }}>
-          <Text style={{ paddingTop: 7 }}>☀️</Text>
+          <Text style={{ paddingTop: 7 }}>🌘</Text>
           <Switch
             trackColor={{ false: "#767577", true: "#81b0ff" }}
             thumbColor={state.darkTheme ? "#f5dd4b" : "#f4f3f4"}
             ios_backgroundColor="#3e3e3e"
             onValueChange={changeTheme}
-            value={state.darkTheme}
+            value={!state.darkTheme}
           />
-          <Text style={{ paddingTop: 7 }}>🌘</Text>
+          <Text style={{ paddingTop: 7 }}>☀️</Text>
         </View>
       </View>
       {/* List of Results */}
@@ -121,6 +119,6 @@ const styles = StyleSheet.create({
   },
   text: {
     fontSize: 18,
-    marginLeft: 10
+    marginLeft: 30,
   }
 });
