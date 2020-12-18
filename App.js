@@ -6,12 +6,12 @@ import { createStackNavigator } from '@react-navigation/stack';
 
 import RandomProvider from './context/RandomContext'
 
-import Profile from './screens/Profile';
-import MainList from './screens/MainList';
+import Profile from './components/Profile';
+import MainListScreen from './screens/MainListScreen';
 import SecondScreen, { TabScreen } from './screens/SecondScreen';
 import FilterScreen from './screens/FilterScreen'
 import { StatusBar } from 'expo-status-bar';
-import Tabs from './navigation/tabs'
+import Tabs from './navigation/Tabs'
 import EStyleSheet from 'react-native-extended-stylesheet';
 
 const Stack = createStackNavigator();
@@ -51,11 +51,12 @@ const Router = () => {
     <>
       <StatusBar hidden={true} />
       <NavigationContainer  >
-        <Stack.Navigator initialRouteName="Main List">
+
+        <Stack.Navigator>
           {/* Tabs */}
           <Stack.Screen name="HomeTab" component={Tabs} />
 
-          <Stack.Screen name="Main List" component={MainList} />
+          <Stack.Screen name="Main List" component={MainListScreen} />
           <Stack.Screen name="Profile" component={Profile} options={{ title: 'Person Details' }} />
           <Stack.Screen name="SecondScreen" component={SecondScreen} />
 

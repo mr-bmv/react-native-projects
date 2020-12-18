@@ -4,7 +4,7 @@ import { width } from '../constants/colors';
 
 import { useRandomContext } from '../context/RandomContext'
 
-const MainList = ({ navigation }) => {
+const MainListScreen = ({ navigation }) => {
 
   const { state, filterPeople, changeTheme, theme } = useRandomContext();
 
@@ -78,7 +78,7 @@ const MainList = ({ navigation }) => {
   );
 };
 
-export default MainList;
+export default MainListScreen;
 
 const styles = StyleSheet.create({
   filterPanel: {

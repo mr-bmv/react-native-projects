@@ -82,6 +82,8 @@ export default class RandomService {
       email: person.email,
       username: person.login.username,
       address: `${person.location.country} ${person.location.city}`,
+      city: person.location.city,
+      country: person.location.country,
       nationality: person.nat,
       gender: person.gender,
       img: {

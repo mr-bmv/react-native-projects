@@ -3,7 +3,6 @@ import { View, Text, Button, StyleSheet, Pressable } from 'react-native';
 import { FontAwesome, FontAwesome5, Ionicons } from '@expo/vector-icons';
 import { useRandomContext } from '../context/RandomContext';
 import { Picker } from '@react-native-picker/picker';
-import { nationality } from "../assets/mapping";
 
 //  components
 import PickerNationalityList from '../components/PickerNationalityList';
