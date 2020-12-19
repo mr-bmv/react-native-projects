@@ -28,16 +28,8 @@ const MainListScreen = ({ navigation }) => {
     </TouchableOpacity>
   );
 
-  if (state.loading) {
-    return (
-      <View style={styles.load}>
-        <Text style={styles.spinner}>Loading</Text>
-      </View>
-    )
-  };
-
   return (
-    <View style={{ backgroundColor: theme.backgroundColor }}>
+    <View style={{ flex: 1, backgroundColor: theme.backgroundColor }}>
       {/* Filter Panel */}
       <View style={[styles.filterPanel, { backgroundColor: theme.navbar }]}>
         <Pressable
@@ -64,7 +56,7 @@ const MainListScreen = ({ navigation }) => {
       </View>
       {/* List of Results */}
       <View
-        style={{ alignItems: "center" }}
+        style={{ flex: 2, alignItems: "center" }}
       >
         <FlatList
           renderItem={renderItem}
