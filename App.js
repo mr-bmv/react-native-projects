@@ -13,6 +13,7 @@ import FilterScreen from './screens/FilterScreen'
 import { StatusBar } from 'expo-status-bar';
 import Tabs from './navigation/Tabs'
 import EStyleSheet from 'react-native-extended-stylesheet';
+import GroupDetails from './components/GroupDetails';
 
 const Stack = createStackNavigator();
 
@@ -59,6 +60,7 @@ const Router = () => {
           {/* <Stack.Screen name="Main List" component={MainListScreen} /> */}
           <Stack.Screen name="Profile" component={Profile} options={{ title: 'Person Details' }} />
           <Stack.Screen name="SecondScreen" component={SecondScreen} />
+          <Stack.Screen name={"Group Details"} component={GroupDetails} />
 
           {/* <Stack.Screen name="TabScreen" component={TabScreen} /> */}
           <Stack.Screen name="Filter" component={FilterScreen} />
@@ -67,6 +69,10 @@ const Router = () => {
         {/* <FilterScreen /> */}
       </NavigationContainer>
     </>
+
+    // <>
+    //   <GroupDetails />
+    // </>
   )
 }
 

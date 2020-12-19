@@ -1,21 +1,30 @@
 import React from 'react'
-import { Ionicons } from '@expo/vector-icons';
+import { AntDesign, Ionicons, MaterialCommunityIcons, MaterialIcons } from '@expo/vector-icons';
 import { Text, View, StyleSheet } from 'react-native'
 import { COLORS, width } from '../../constants/colors';
 import { ScrollView } from 'react-native-gesture-handler';
+import { Pressable } from 'react-native';
+import { useNavigation } from '@react-navigation/native';
 
 const TempGroup = () => {
+    const navigation = useNavigation();
     return (
         <View style={styles.row}>
-            <Text style={styles.title}>Group Name</Text>
+            <Pressable
+                style={styles.checkBox}
+                onPress={() => navigation.navigate("Group Details")}
+            >
+                <Text style={styles.title}>Group Name</Text>
+            </Pressable>
             <View style={styles.info}>
                 <Text style={styles.qty}>QTY</Text>
                 {/* logic to select individual group */}
-                {
-                    false ?
-                        <Ionicons name="square" size={36} color={COLORS.dark.primary} /> :
-                        <Ionicons name="square-outline" size={36} color={COLORS.dark.primary} />
-                }
+                <Pressable
+                    style={styles.checkBox}
+                    onPress={() => console.warn("Delete group")}
+                >
+                    <MaterialIcons name="delete-outline" size={34} color={COLORS.dark.warning} />
+                </Pressable>
             </View>
         </View>
     )
