@@ -58,10 +58,7 @@ const AddGroupToUser = () => {
             <FlatList
                 renderItem={tempGroup}
                 data={newGroups}
-                keyExtractor={(_, index) => {
-                    console.log(index)
-                    return index
-                }}
+                keyExtractor={item => item}
             />
             {/* <ScrollView >
                 <TempGroup />

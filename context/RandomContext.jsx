@@ -22,7 +22,7 @@ const RandomProvider = ({ children }) => {
         groups: {
             groupname1: { userID1: {}, userID2: {} },
             groupname2: { userID1: {}, userID2: {} },
-            groupname3: { userID1: {}, userID2: {} },
+            groupname3: { userID1: {}, userID2: {} }
         }
     }
 
