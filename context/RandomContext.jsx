@@ -20,9 +20,9 @@ const RandomProvider = ({ children }) => {
         darkTheme: true,
         error: false,
         groups: {
-            groupname1: { userID1: {}, userID2: {} },
+            groupname1: { userID1: {}, userID3: {}, userID4: {}, userID6: {} },
             groupname2: { userID1: {}, userID2: {} },
-            groupname3: { userID1: {}, userID2: {} }
+            groupname3: { userID1: {} }
         }
     }
 

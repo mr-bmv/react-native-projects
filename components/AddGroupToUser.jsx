@@ -12,6 +12,20 @@ const AddGroupToUser = () => {
     console.log("------------")
     console.log(state.groups)
     const newGroups = Object.keys(state.groups)
+    const array = newGroups.map(
+        item => Object.keys(state.groups[item]).length
+    )
+    const arrayGroup = Object.keys(state.groups).map(
+        item => {
+            const size = Object.keys(state.groups[item]).length;
+            return {
+                id: item,
+                size
+            }
+        }
+    )
+
+    console.log(arrayGroup)
     console.log("------", newGroups, "------")
     const navigation = useNavigation();
     const GROUPS = [
@@ -37,10 +51,10 @@ const AddGroupToUser = () => {
                     style={styles.checkBox}
                     onPress={() => navigation.goBack()}
                 >
-                    <Text style={styles.title}>{item}</Text>
+                    <Text style={styles.title}>{item.id}</Text>
                 </Pressable>
                 <View style={styles.info}>
-                    <Text style={styles.qty}>QTY</Text>
+                    <Text style={styles.qty}>{item.size}</Text>
                     {/* logic to select individual group */}
                     <Pressable
                         style={styles.checkBox}
@@ -57,8 +71,8 @@ const AddGroupToUser = () => {
         <View style={[styles.container, { backgroundColor: "#002b36" }]}>
             <FlatList
                 renderItem={tempGroup}
-                data={newGroups}
-                keyExtractor={item => item}
+                data={arrayGroup}
+                keyExtractor={item => item.id}
             />
             {/* <ScrollView >
                 <TempGroup />
