@@ -57,7 +57,6 @@ const RandomProvider = ({ children }) => {
     };
 
     const theme = state.darkTheme ? COLORS.dark : COLORS.light;
-    console.log(state.groups.groupname3)
 
     return (
         <RandomContext.Provider

@@ -1,45 +1,69 @@
 import React from 'react'
 import { AntDesign, Ionicons, MaterialCommunityIcons, MaterialIcons } from '@expo/vector-icons';
-import { Text, View, StyleSheet } from 'react-native'
+import { Text, View, StyleSheet, FlatList } from 'react-native'
 import { useNavigation } from '@react-navigation/native';
 import { ScrollView } from 'react-native-gesture-handler';
 import { Pressable } from 'react-native';
 import { COLORS, width } from '../constants/colors';
-
-const TempGroup = () => {
-    const navigation = useNavigation();
-    return (
-        <View style={styles.row}>
-            <Pressable
-                style={styles.checkBox}
-                onPress={() => navigation.navigate("Profile")}
-            >
-                <Text style={styles.title}>Group Name</Text>
-            </Pressable>
-            <View style={styles.info}>
-                <Text style={styles.qty}>QTY</Text>
-                {/* logic to select individual group */}
-                <Pressable
-                    style={styles.checkBox}
-                    onPress={() => console.warn("Delete group")}
-                >
-                    {/* <Ionicons name="square-outline" size={36} color={COLORS.dark.primary} /> */}
-                </Pressable>
-            </View>
-        </View>
-    )
-};
+import { useRandomContext } from "../context/RandomContext"
 
 const AddGroupToUser = () => {
+    const { state } = useRandomContext();
+    console.log("------------")
+    console.log(state.groups)
+    const newGroups = Object.keys(state.groups)
+    console.log("------", newGroups, "------")
+    const navigation = useNavigation();
+    const GROUPS = [
+        {
+            id: '1aasdf',
+            data: 'asdfdas'
+        },
+        {
+            id: '2aasdf',
+            data: 'asdfdas2'
+        },
+        {
+            id: '3aasdf',
+            data: 'asdfdas3'
+        }
+    ]
+
+    const tempGroup = ({ item }) => {
+        // console.log("Props - ", JSON.stringify(props))
+        return (
+            <View style={styles.row}>
+                <Pressable
+                    style={styles.checkBox}
+                    onPress={() => navigation.goBack()}
+                >
+                    <Text style={styles.title}>{item}</Text>
+                </Pressable>
+                <View style={styles.info}>
+                    <Text style={styles.qty}>QTY</Text>
+                    {/* logic to select individual group */}
+                    <Pressable
+                        style={styles.checkBox}
+                        onPress={() => console.warn("Delete group")}
+                    >
+                        {/* <Ionicons name="square-outline" size={36} color={COLORS.dark.primary} /> */}
+                    </Pressable>
+                </View>
+            </View>
+        )
+    };
 
     return (
         <View style={[styles.container, { backgroundColor: "#002b36" }]}>
-            {/* <FlatList
-                renderItem={TempGroup}
-                data={state.users}
-                keyExtractor={item => item.id}
-            /> */}
-            <ScrollView >
+            <FlatList
+                renderItem={tempGroup}
+                data={newGroups}
+                keyExtractor={(_, index) => {
+                    console.log(index)
+                    return index
+                }}
+            />
+            {/* <ScrollView >
                 <TempGroup />
                 <TempGroup />
                 <TempGroup />
@@ -49,7 +73,7 @@ const AddGroupToUser = () => {
                 <TempGroup />
                 <TempGroup />
                 <TempGroup />
-            </ScrollView>
+            </ScrollView> */}
         </View>
     )
 };
