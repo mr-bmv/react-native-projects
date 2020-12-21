@@ -8,10 +8,31 @@ const getNationality = (text) => {
     return nationality[text]
 };
 
+const dummyUser = {
+    "address": "Australia Wollongong",
+    "age": 24,
+    "city": "Wollongong",
+    "country": "Australia",
+    "email": "amber.anderson@example.com",
+    "gender": "female",
+    "id": "003b32f8-a6d8-470c-b8f8-daf24befddb3",
+    "img": {
+        "large": "https://randomuser.me/api/portraits/women/28.jpg",
+        "medium": "https://randomuser.me/api/portraits/med/women/28.jpg",
+        "small": "https://randomuser.me/api/portraits/thumb/women/28.jpg",
+    },
+    "name": "Amber Anderson",
+    "nationality": "AU",
+    "phone": "0437-563-683",
+    "title": "Miss",
+    "username": "orangeswan704",
+}
+
 const Profile = ({ navigation, route }) => {
     /* 2. Get the param */
-    const { name, age, phone, email, username, address, nationality, city, img } = route.params.item;
-    const { theme } = useRandomContext();
+    const { name, age, phone, email, username, address, nationality, city, img, id } = route.params.item;
+    const { theme, setGroup } = useRandomContext();
+    // const id = dummyUser.id
     return (
         <View style={[styles.container, { backgroundColor: theme.backgroundColor }]}>
             {/* Name and Photo */}
@@ -69,7 +90,8 @@ const Profile = ({ navigation, route }) => {
             <Button title="Go back" onPress={() => navigation.goBack()} /> */}
             <Pressable
                 style={[styles.button, { backgroundColor: theme.primary, }]}
-                onPress={() => console.warn('Add to group')}
+                // onPress={() => setGroup({ [id]: route.params.item })}
+                onPress={() => navigation.navigate("Add User")}
             >
 
                 <Text style={styles.buttonText}>Add Group </Text>

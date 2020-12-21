@@ -14,6 +14,7 @@ import { StatusBar } from 'expo-status-bar';
 import Tabs from './navigation/Tabs'
 import EStyleSheet from 'react-native-extended-stylesheet';
 import GroupDetails from './components/GroupDetails';
+import AddGroupToUser from './components/AddGroupToUser';
 
 const Stack = createStackNavigator();
 
@@ -61,6 +62,7 @@ const Router = () => {
           <Stack.Screen name="Profile" component={Profile} options={{ title: 'Person Details' }} />
           <Stack.Screen name="SecondScreen" component={SecondScreen} />
           <Stack.Screen name={"Group Details"} component={GroupDetails} />
+          <Stack.Screen name={"Add User"} component={AddGroupToUser} />
 
           {/* <Stack.Screen name="TabScreen" component={TabScreen} /> */}
           <Stack.Screen name="Filter" component={FilterScreen} />

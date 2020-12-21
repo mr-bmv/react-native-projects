@@ -1,5 +1,5 @@
 import React, { useContext, useState, useReducer } from 'react'
-import { GET_USERS, SET_LOADING, CHANGE_THEME, FETCH_PEOPLE_FAILURE } from '../actionTypes/randomTypes';
+import { GET_USERS, SET_LOADING, CHANGE_THEME, FETCH_PEOPLE_FAILURE, SET_GROUP } from '../actionTypes/randomTypes';
 import { RandomReducer } from '../reducers/RandomReducer';
 import RandomService from '../services/random-person-service'
 import { COLORS } from '../constants/colors';
@@ -10,7 +10,7 @@ const RandomContext = React.createContext();
 
 export const useRandomContext = () => {
     return useContext(RandomContext)
-}
+};
 
 const RandomProvider = ({ children }) => {
 
@@ -18,7 +18,12 @@ const RandomProvider = ({ children }) => {
         users: [],
         loading: false,
         darkTheme: true,
-        error: false
+        error: false,
+        groups: {
+            groupname1: { userID1: {}, userID2: {} },
+            groupname2: { userID1: {}, userID2: {} },
+            groupname3: { userID1: {}, userID2: {} },
+        }
     }
 
     const [state, dispatch] = useReducer(RandomReducer, initialState)
@@ -43,20 +48,26 @@ const RandomProvider = ({ children }) => {
         dispatch({ type: SET_LOADING })
     };
 
+    const setGroup = (title) => {
+        dispatch({ type: SET_GROUP, payload: title })
+    }
+
     const changeTheme = () => {
         dispatch({ type: CHANGE_THEME })
     };
 
     const theme = state.darkTheme ? COLORS.dark : COLORS.light;
+    console.log(state.groups.groupname3)
 
     return (
         <RandomContext.Provider
             value={{
                 state,
+                theme,
                 getUsers,
                 filterPeople,
                 changeTheme,
-                theme
+                setGroup
             }}
         >
             { children}
