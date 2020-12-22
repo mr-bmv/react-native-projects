@@ -16,8 +16,6 @@ const FilterScreen = ({ navigation }) => {
 
   const { state, filterPeople, theme } = useRandomContext();
 
-  const backgroundColor = state.darkTheme ? 'black' : 'white';
-
   const onFilter = (gender) => {
     setGender((isSelected) => ({ ...isSelected, gender: { ...isSelected.gender, [gender]: !isSelected.gender[gender] } }))
   }

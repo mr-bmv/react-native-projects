@@ -12,9 +12,10 @@ export const COLORS = {
         // colors
         backgroundColor: "#002b36",
         backgroundColorLight: "#073642",
-        navbar:"#073642",
+        navbar: "#073642",
         mainText: "#839496",
-        input: "#a9bdbd"
+        input: "#a9bdbd",
+        inputText: "#495057"
     },
     light: {
         // base colors
@@ -28,7 +29,7 @@ export const COLORS = {
         backgroundColor: "#158cba",
         // backgroundColor: "#FFF",
         backgroundColorLight: "#FFF",
-        navbar:"#f0f0f0",
+        navbar: "#f0f0f0",
         // backgroundColorLight: "#158cba",
         mainText: "#222",
         input: "#f0f0f0"
