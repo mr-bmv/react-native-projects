@@ -13,11 +13,17 @@ const GroupDetails = ({ route, navigation }) => {
 
     const groupName = route.params.item.id
 
-    // console.log('--')
-    // console.log(route.params.item)
-    // console.log('--')
-    const data = state.groups[groupName]
-    // console.log(data)
+    console.log('--')
+    console.log(route.params.item)
+    console.log('--')
+    const arrOfFriends = state.groups[groupName]
+    console.log(arrOfFriends)
+
+    const arrOfUserData = arrOfFriends.map(user => {
+        return state.friends[user]
+    })
+
+    console.log(arrOfUserData)
 
     const renderItem = ({ item }) => {
         return (
@@ -52,7 +58,7 @@ const GroupDetails = ({ route, navigation }) => {
             <Text style={[styles.qty, { color: theme.primary }]}>QTY</Text>
             <FlatList
                 renderItem={renderItem}
-                data={dummy}
+                data={arrOfUserData}
                 keyExtractor={item => item.id}
             />
         </View>

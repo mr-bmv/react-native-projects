@@ -9,9 +9,7 @@ const handlers = {
   [FETCH_PEOPLE_FAILURE]: (state, { payload }) => ({ ...state, loading: false, error: payload }),
   [DELETE_GROUP]: (state, { payload }) => ({ ...state, groups: getGroups(state.groups, payload) }),
   [CREATE_GROUP]: (state, { payload }) => ({ ...state, groups: setGroups(state.groups, payload) }),
-
   [SET_FRIENDS]: (state, { payload }) => {
-    // console.log(payload)
     return ({
       ...state,
       friends: {
@@ -23,9 +21,11 @@ const handlers = {
   },
   [SET_GROUP]: (state, { payload }) => {
     const personId = Object.keys(payload.data)[0]
-    return (
-
-      {
+    console.log(state.groups[payload.id])
+    console.log(personId)
+    console.log(state.groups[payload.id].indexOf(personId))
+    if (state.groups[payload.id].indexOf(personId) === -1) {
+      return ({
         ...state,
         groups: {
           ...state.groups,
@@ -35,9 +35,22 @@ const handlers = {
           ]
         }
       })
+    }
+    return state;
+    // return ({
+    //   ...state,
+    //   groups: {
+    //     ...state.groups,
+    //     [payload.id]: [
+    //       ...state.groups[payload.id],
+    //       personId
+    //     ]
+    //   }
+    // })
   },
   DEFAULT: (state) => state
-};
+}
+
 
 export const RandomReducer = (state, action) => {
   const handler = handlers[action.type] || handlers.DEFAULT
