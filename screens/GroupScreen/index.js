@@ -1,16 +1,11 @@
 import React from 'react'
-import { AntDesign, Ionicons, MaterialCommunityIcons, MaterialIcons } from '@expo/vector-icons';
+import { MaterialIcons } from '@expo/vector-icons';
 import { Text, View, StyleSheet, FlatList, Pressable } from 'react-native'
 import { width } from '../../constants/colors';
-import { useNavigation } from '@react-navigation/native';
 import { useRandomContext } from '../../context/RandomContext'
 
 const GroupScreen = ({ navigation, route }) => {
-  const { state, setGroup, theme } = useRandomContext();
-  const newGroups = Object.keys(state.groups)
-  const array = newGroups.map(
-    item => Object.keys(state.groups[item]).length
-  )
+  const { state, theme } = useRandomContext();
   const arrayGroup = Object.keys(state.groups).map(
     item => {
       const size = Object.keys(state.groups[item]).length;
@@ -22,7 +17,6 @@ const GroupScreen = ({ navigation, route }) => {
   );
 
   const tempGroup = () => {
-    // console.log("Props - ", JSON.stringify(props))
     return (
       <View style={[styles.row, { backgroundColor: theme.backgroundColorLight }]}>
         <Pressable
