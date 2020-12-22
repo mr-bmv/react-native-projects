@@ -1,5 +1,5 @@
 import React, { useContext, useState, useReducer } from 'react'
-import { GET_USERS, SET_LOADING, CHANGE_THEME, FETCH_PEOPLE_FAILURE, SET_GROUP, DELETE_GROUP, CREATE_GROUP } from '../actionTypes/randomTypes';
+import { GET_USERS, SET_LOADING, CHANGE_THEME, FETCH_PEOPLE_FAILURE, SET_GROUP, DELETE_GROUP, SET_FRIENDS, CREATE_GROUP } from '../actionTypes/randomTypes';
 import { RandomReducer } from '../reducers/RandomReducer';
 import RandomService from '../services/random-person-service'
 import { COLORS } from '../constants/colors';
@@ -16,6 +16,7 @@ const RandomProvider = ({ children }) => {
 
   const initialState = {
     users: [],
+    friends: {},
     loading: false,
     darkTheme: true,
     error: false,
@@ -44,12 +45,16 @@ const RandomProvider = ({ children }) => {
     }
   };
 
+  const setFriends = (friend) => {
+    dispatch({ type: SET_FRIENDS, payload: friend })
+  }
   const setLoading = () => {
     dispatch({ type: SET_LOADING })
   };
 
   const setGroup = (title) => {
-    dispatch({ type: SET_GROUP, payload: title })
+    setFriends(title.data);
+    dispatch({ type: SET_GROUP, payload: title });
   }
 
   const changeTheme = () => {

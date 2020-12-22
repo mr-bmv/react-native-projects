@@ -28,7 +28,7 @@ const AddGroupToUser = ({ navigation, route }) => {
           onPress={() => {
             setGroup({
               id: item.id,
-              data: [route.params.item.item.id]
+              data: { [route.params.item.item.id]: { ...route.params.item.item } }
             })
             navigation.goBack()
           }}

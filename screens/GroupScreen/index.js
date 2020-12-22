@@ -18,14 +18,14 @@ const GroupScreen = ({ navigation, route }) => {
     }
   );
 
-  const tempGroup = ({ item }) => {
+  const groupList = ({ item }) => {
     return (
       <View style={[styles.row, { backgroundColor: theme.backgroundColorLight }]}>
 
         {/* Take all friends inside the group */}
         <Pressable
           style={styles.checkBox}
-          onPress={() => navigation.navigate("Group Details")}
+          onPress={() => navigation.navigate("Group Details", { item })}
         >
           <Text style={[styles.title, { color: theme.success, }]}>{item.id}</Text>
         </Pressable>
@@ -41,14 +41,13 @@ const GroupScreen = ({ navigation, route }) => {
           </Pressable>
         </View>
       </View>
-
     )
   };
 
   return (
     <View style={[styles.container, { backgroundColor: theme.backgroundColor }]}>
       <FlatList
-        renderItem={tempGroup}
+        renderItem={groupList}
         data={arrayGroup}
         keyExtractor={item => item.id}
       />

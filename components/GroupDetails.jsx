@@ -7,9 +7,17 @@ import { COLORS, width } from '../constants/colors';
 import { useRandomContext } from '../context/RandomContext';
 import dummy from '../services/dummyUsers'
 
-const GroupDetails = () => {
-    const { theme } = useRandomContext();
-    const navigation = useNavigation();
+const GroupDetails = ({ route, navigation }) => {
+    const { state, theme } = useRandomContext();
+    // const navigation = useNavigation();
+
+    const groupName = route.params.item.id
+
+    // console.log('--')
+    // console.log(route.params.item)
+    // console.log('--')
+    const data = state.groups[groupName]
+    // console.log(data)
 
     const renderItem = ({ item }) => {
         return (

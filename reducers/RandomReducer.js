@@ -1,6 +1,6 @@
 import getGroups from "../actions/getGroups"
 import setGroups from "../actions/setGroups"
-import { CHANGE_THEME, FETCH_PEOPLE_FAILURE, GET_USERS, SET_GROUP, SET_LOADING, DELETE_GROUP, CREATE_GROUP } from "../actionTypes/randomTypes"
+import { CHANGE_THEME, FETCH_PEOPLE_FAILURE, GET_USERS, SET_GROUP, SET_LOADING, DELETE_GROUP, CREATE_GROUP, SET_FRIENDS } from "../actionTypes/randomTypes"
 
 const handlers = {
   [GET_USERS]: (state, { payload }) => ({ ...state, users: payload, loading: false }),
@@ -9,7 +9,20 @@ const handlers = {
   [FETCH_PEOPLE_FAILURE]: (state, { payload }) => ({ ...state, loading: false, error: payload }),
   [DELETE_GROUP]: (state, { payload }) => ({ ...state, groups: getGroups(state.groups, payload) }),
   [CREATE_GROUP]: (state, { payload }) => ({ ...state, groups: setGroups(state.groups, payload) }),
+
+  [SET_FRIENDS]: (state, { payload }) => {
+    // console.log(payload)
+    return ({
+      ...state,
+      friends: {
+        ...state.friends,
+
+        ...payload
+      }
+    })
+  },
   [SET_GROUP]: (state, { payload }) => {
+    const personId = Object.keys(payload.data)[0]
     return (
 
       {
@@ -18,7 +31,7 @@ const handlers = {
           ...state.groups,
           [payload.id]: [
             ...state.groups[payload.id],
-            ...payload.data
+            personId
           ]
         }
       })
