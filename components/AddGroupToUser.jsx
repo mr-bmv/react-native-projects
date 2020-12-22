@@ -1,15 +1,11 @@
 import React from 'react'
-import { AntDesign, Ionicons, MaterialCommunityIcons, MaterialIcons } from '@expo/vector-icons';
 import { Text, View, StyleSheet, FlatList } from 'react-native'
-import { useNavigation } from '@react-navigation/native';
 import { Pressable } from 'react-native';
-import { COLORS, width } from '../constants/colors';
+import { width } from '../constants/colors';
 import { useRandomContext } from "../context/RandomContext"
 
 const AddGroupToUser = ({ navigation, route }) => {
-    const { state, setGroup } = useRandomContext();
-    // console.log("------------")
-    // console.log(state.groups)
+    const { state, setGroup, theme } = useRandomContext();
     const newGroups = Object.keys(state.groups)
     const array = newGroups.map(
         item => Object.keys(state.groups[item]).length
@@ -24,41 +20,13 @@ const AddGroupToUser = ({ navigation, route }) => {
         }
     );
 
-    // console.log(arrayGroup)
-    // console.log("------", newGroups, "------")
-    // const navigation = useNavigation();
-    const GROUPS = [
-        {
-            id: '1aasdf',
-            data: 'asdfdas'
-        },
-        {
-            id: '2aasdf',
-            data: 'asdfdas2'
-        },
-        {
-            id: '3aasdf',
-            data: 'asdfdas3'
-        }
-    ]
-
     const tempGroup = ({ item }) => {
         // console.log("Props - ", JSON.stringify(props))
         return (
-            <View style={styles.row}>
+            <View style={[styles.row, { backgroundColor: theme.backgroundColorLight }]}>
                 <Pressable
                     style={styles.checkBox}
                     onPress={() => {
-                        // console.log("*-*-*-* Cough User -*-*-*-*")
-                        // console.log(route.params.item.item.id)
-                        // console.log({
-                        //     [route.params.item.item.id]: { ...route.params.item.item }
-                        // })
-                        // console.log("*-*-*-*- Group Name -*-**-*-*-")
-                        // console.log({
-                        //     id: item.id,
-                        //     [route.params.item.item.id]: { ...route.params.item.item }
-                        // })
                         setGroup({
                             id: item.id,
                             data: { [route.params.item.item.id]: { ...route.params.item.item } }
@@ -66,10 +34,10 @@ const AddGroupToUser = ({ navigation, route }) => {
                         navigation.goBack()
                     }}
                 >
-                    <Text style={styles.title}>{item.id}</Text>
+                    <Text style={[styles.title, { color: theme.success, }]}>{item.id}</Text>
                 </Pressable>
                 <View style={styles.info}>
-                    <Text style={styles.qty}>{item.size}</Text>
+                    <Text style={[styles.qty, { color: theme.mainText }]}>{item.size}</Text>
                     {/* logic to select individual group */}
                     <Pressable
                         style={styles.checkBox}
@@ -83,23 +51,12 @@ const AddGroupToUser = ({ navigation, route }) => {
     };
 
     return (
-        <View style={[styles.container, { backgroundColor: "#002b36" }]}>
+        <View style={[styles.container, { backgroundColor: theme.backgroundColor }]}>
             <FlatList
                 renderItem={tempGroup}
                 data={arrayGroup}
                 keyExtractor={item => item.id}
             />
-            {/* <ScrollView >
-                <TempGroup />
-                <TempGroup />
-                <TempGroup />
-                <TempGroup />
-                <TempGroup />
-                <TempGroup />
-                <TempGroup />
-                <TempGroup />
-                <TempGroup />
-            </ScrollView> */}
         </View>
     )
 };
@@ -112,7 +69,6 @@ const styles = StyleSheet.create({
     },
     row: {
         flexDirection: "row",
-        backgroundColor: COLORS.dark.backgroundColorLight,
         width: width - 30,
         height: 60,
         margin: 8,
@@ -126,17 +82,13 @@ const styles = StyleSheet.create({
         marginHorizontal: 10,
     },
     title: {
-        color: COLORS.dark.success,
         fontSize: 22,
         paddingLeft: 20,
         fontWeight: "700"
-        // fontFamily: "Roboto-Bold"
     },
     qty: {
-        color: COLORS.dark.mainText,
         fontSize: 22,
         marginHorizontal: 30,
         paddingTop: 3,
-        // fontWeight: "700"
     },
 });
