@@ -5,7 +5,9 @@ import { width } from '../../constants/colors';
 import { useRandomContext } from '../../context/RandomContext'
 
 const GroupScreen = ({ navigation, route }) => {
-  const { state, theme } = useRandomContext();
+  const { state, theme, deleteGroup } = useRandomContext();
+
+  // list of all groups
   const arrayGroup = Object.keys(state.groups).map(
     item => {
       const size = Object.keys(state.groups[item]).length;
@@ -16,21 +18,24 @@ const GroupScreen = ({ navigation, route }) => {
     }
   );
 
-  const tempGroup = () => {
+  const tempGroup = ({ item }) => {
     return (
       <View style={[styles.row, { backgroundColor: theme.backgroundColorLight }]}>
+
+        {/* Take all friends inside the group */}
         <Pressable
           style={styles.checkBox}
           onPress={() => navigation.navigate("Group Details")}
         >
-          <Text style={[styles.title, { color: theme.success, }]}>Group Name</Text>
+          <Text style={[styles.title, { color: theme.success, }]}>{item.id}</Text>
         </Pressable>
         <View style={styles.info}>
-          <Text style={[styles.qty, { color: theme.mainText }]}>QTY</Text>
-          {/* logic to select individual group */}
+          <Text style={[styles.qty, { color: theme.mainText }]}>{item.size}</Text>
+
+          {/* Delete group */}
           <Pressable
             style={styles.checkBox}
-            onPress={() => console.warn("Delete group")}
+            onPress={() => deleteGroup(item.id)}
           >
             <MaterialIcons name="delete-outline" size={34} color={theme.warning} />
           </Pressable>
