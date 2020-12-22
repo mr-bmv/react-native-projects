@@ -16,10 +16,10 @@ const handlers = {
         ...state,
         groups: {
           ...state.groups,
-          [payload.id]: {
+          [payload.id]: [
             ...state.groups[payload.id],
             ...payload.data
-          }
+          ]
         }
       })
   },

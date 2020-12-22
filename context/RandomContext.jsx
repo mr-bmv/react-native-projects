@@ -9,81 +9,81 @@ const service = new RandomService();
 const RandomContext = React.createContext();
 
 export const useRandomContext = () => {
-    return useContext(RandomContext)
+  return useContext(RandomContext)
 };
 
 const RandomProvider = ({ children }) => {
 
-    const initialState = {
-        users: [],
-        loading: false,
-        darkTheme: true,
-        error: false,
-        groups: {
-            groupname1: { userID1: {}, userID3: {}, userID4: {}, userID6: {} },
-            groupname2: { userID1: {}, userID2: {} },
-            groupname3: { userID1: {} }
-        }
+  const initialState = {
+    users: [],
+    loading: false,
+    darkTheme: true,
+    error: false,
+    groups: {
+      groupname1: ['user1', 'user2', 'user3'],
+      groupname2: ['user1', 'user2'],
+      groupname3: ['user1', 'user2', 'user3', 'user4', 'user5']
     }
+  }
 
-    const [state, dispatch] = useReducer(RandomReducer, initialState)
+  const [state, dispatch] = useReducer(RandomReducer, initialState)
 
-    const getUsers = async () => {
-        setLoading();
-        const response = await service.getNationality();
+  const getUsers = async () => {
+    setLoading();
+    const response = await service.getNationality();
 
-        dispatch({ type: GET_USERS, payload: response })
-    };
+    dispatch({ type: GET_USERS, payload: response })
+  };
 
-    const filterPeople = async (filterList = '') => {
-        try {
-            const response = await service.getPeople(filterList);
-            dispatch({ type: GET_USERS, payload: response })
-        } catch (error) {
-            dispatch({ type: FETCH_PEOPLE_FAILURE, payload: error })
-        }
-    };
-
-    const setLoading = () => {
-        dispatch({ type: SET_LOADING })
-    };
-
-    const setGroup = (title) => {
-        dispatch({ type: SET_GROUP, payload: title })
+  const filterPeople = async (filterList = '') => {
+    try {
+      const response = await service.getPeople(filterList);
+      dispatch({ type: GET_USERS, payload: response })
+    } catch (error) {
+      dispatch({ type: FETCH_PEOPLE_FAILURE, payload: error })
     }
+  };
 
-    const changeTheme = () => {
-        dispatch({ type: CHANGE_THEME })
-    };
+  const setLoading = () => {
+    dispatch({ type: SET_LOADING })
+  };
 
-    const deleteGroup = (group) => {
-        dispatch({ type: DELETE_GROUP, payload: group })
-    };
+  const setGroup = (title) => {
+    dispatch({ type: SET_GROUP, payload: title })
+  }
 
-    const createGroup = (name) => {
-        dispatch({ type: CREATE_GROUP, payload: name })
-    };
+  const changeTheme = () => {
+    dispatch({ type: CHANGE_THEME })
+  };
 
-    const theme = state.darkTheme ? COLORS.dark : COLORS.light;
+  const deleteGroup = (group) => {
+    dispatch({ type: DELETE_GROUP, payload: group })
+  };
 
-    console.log("STATE - ", state)
+  const createGroup = (name) => {
+    dispatch({ type: CREATE_GROUP, payload: name })
+  };
 
-    return (
-        <RandomContext.Provider
-            value={{
-                state,
-                theme,
-                getUsers,
-                filterPeople,
-                changeTheme,
-                setGroup,
-                deleteGroup,
-                createGroup
-            }}
-        >
-            { children}
-        </RandomContext.Provider>
-    )
+  const theme = state.darkTheme ? COLORS.dark : COLORS.light;
+
+  console.log("STATE - ", state)
+
+  return (
+    <RandomContext.Provider
+      value={{
+        state,
+        theme,
+        getUsers,
+        filterPeople,
+        changeTheme,
+        setGroup,
+        deleteGroup,
+        createGroup
+      }}
+    >
+      { children}
+    </RandomContext.Provider>
+  )
 }
 
 export default RandomProvider;
