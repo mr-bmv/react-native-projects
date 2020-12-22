@@ -31,6 +31,7 @@ const dummyUser = {
 const Profile = ({ navigation, route }) => {
     /* 2. Get the param */
     const { name, age, phone, email, username, address, nationality, city, img, id } = route.params.item;
+    const item = route.params;
     const { theme, setGroup } = useRandomContext();
     // const id = dummyUser.id
     return (
@@ -91,10 +92,10 @@ const Profile = ({ navigation, route }) => {
             <Pressable
                 style={[styles.button, { backgroundColor: theme.primary, }]}
                 // onPress={() => setGroup({ [id]: route.params.item })}
-                onPress={() => navigation.navigate("Add User")}
+                onPress={() => navigation.navigate("Add User", { item })}
             >
 
-                <Text style={styles.buttonText}>Add Group </Text>
+                <Text style={styles.buttonText}>Add Group</Text>
             </Pressable>
         </View >
     )

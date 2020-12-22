@@ -2,15 +2,14 @@ import React from 'react'
 import { AntDesign, Ionicons, MaterialCommunityIcons, MaterialIcons } from '@expo/vector-icons';
 import { Text, View, StyleSheet, FlatList } from 'react-native'
 import { useNavigation } from '@react-navigation/native';
-import { ScrollView } from 'react-native-gesture-handler';
 import { Pressable } from 'react-native';
 import { COLORS, width } from '../constants/colors';
 import { useRandomContext } from "../context/RandomContext"
 
-const AddGroupToUser = () => {
-    const { state } = useRandomContext();
-    console.log("------------")
-    console.log(state.groups)
+const AddGroupToUser = ({ navigation, route }) => {
+    const { state, setGroup } = useRandomContext();
+    // console.log("------------")
+    // console.log(state.groups)
     const newGroups = Object.keys(state.groups)
     const array = newGroups.map(
         item => Object.keys(state.groups[item]).length
@@ -23,11 +22,11 @@ const AddGroupToUser = () => {
                 size
             }
         }
-    )
+    );
 
-    console.log(arrayGroup)
-    console.log("------", newGroups, "------")
-    const navigation = useNavigation();
+    // console.log(arrayGroup)
+    // console.log("------", newGroups, "------")
+    // const navigation = useNavigation();
     const GROUPS = [
         {
             id: '1aasdf',
@@ -49,7 +48,23 @@ const AddGroupToUser = () => {
             <View style={styles.row}>
                 <Pressable
                     style={styles.checkBox}
-                    onPress={() => navigation.goBack()}
+                    onPress={() => {
+                        // console.log("*-*-*-* Cough User -*-*-*-*")
+                        // console.log(route.params.item.item.id)
+                        // console.log({
+                        //     [route.params.item.item.id]: { ...route.params.item.item }
+                        // })
+                        // console.log("*-*-*-*- Group Name -*-**-*-*-")
+                        // console.log({
+                        //     id: item.id,
+                        //     [route.params.item.item.id]: { ...route.params.item.item }
+                        // })
+                        setGroup({
+                            id: item.id,
+                            data: { [route.params.item.item.id]: { ...route.params.item.item } }
+                        })
+                        navigation.goBack()
+                    }}
                 >
                     <Text style={styles.title}>{item.id}</Text>
                 </Pressable>

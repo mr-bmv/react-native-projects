@@ -58,6 +58,8 @@ const RandomProvider = ({ children }) => {
 
     const theme = state.darkTheme ? COLORS.dark : COLORS.light;
 
+    console.log("STATE - ", state)
+
     return (
         <RandomContext.Provider
             value={{
