@@ -3,6 +3,7 @@ import { MaterialIcons } from '@expo/vector-icons';
 import { Text, View, StyleSheet, FlatList, Pressable } from 'react-native'
 import { width } from '../../constants/colors';
 import { useRandomContext } from '../../context/RandomContext'
+import EmptyGroup from '../../components/EmptyGroup';
 
 const GroupScreen = ({ navigation, route }) => {
   const { state, theme, deleteGroup } = useRandomContext();
@@ -46,11 +47,14 @@ const GroupScreen = ({ navigation, route }) => {
 
   return (
     <View style={[styles.container, { backgroundColor: theme.backgroundColor }]}>
-      <FlatList
-        renderItem={groupList}
-        data={arrayGroup}
-        keyExtractor={item => item.id}
-      />
+      { arrayGroup.length ?
+        <FlatList
+          renderItem={groupList}
+          data={arrayGroup}
+          keyExtractor={item => item.id}
+        />
+        : <EmptyGroup />}
+
     </View>
   )
 };

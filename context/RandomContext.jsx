@@ -17,14 +17,10 @@ const RandomProvider = ({ children }) => {
   const initialState = {
     users: [],
     friends: {},
+    groups: {},
     loading: false,
     darkTheme: true,
     error: false,
-    groups: {
-      groupname1: ['user1', 'user2', 'user3'],
-      groupname2: ['user1', 'user2'],
-      groupname3: ['user1', 'user2', 'user3', 'user4', 'user5']
-    }
   }
 
   const [state, dispatch] = useReducer(RandomReducer, initialState)

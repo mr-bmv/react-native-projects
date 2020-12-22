@@ -1,5 +1,5 @@
 export default class RandomService {
-  _apiBase = 'https://randomuser.me/api/?results=2';
+  _apiBase = 'https://randomuser.me/api/?results=15';
 
   getResource = async (url) => {
     const res = await fetch(`${this._apiBase}${url}`);
