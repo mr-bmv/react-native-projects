@@ -1,87 +1,90 @@
 import React from 'react'
 import { AntDesign, Ionicons, MaterialCommunityIcons, MaterialIcons } from '@expo/vector-icons';
-import { Text, View, StyleSheet } from 'react-native'
-import { COLORS, width } from '../../constants/colors';
-import { ScrollView } from 'react-native-gesture-handler';
-import { Pressable } from 'react-native';
+import { Text, View, StyleSheet, FlatList, Pressable } from 'react-native'
+import { width } from '../../constants/colors';
 import { useNavigation } from '@react-navigation/native';
+import { useRandomContext } from '../../context/RandomContext'
 
-const TempGroup = () => {
-    const navigation = useNavigation();
+const GroupScreen = ({ navigation, route }) => {
+  const { state, setGroup, theme } = useRandomContext();
+  const newGroups = Object.keys(state.groups)
+  const array = newGroups.map(
+    item => Object.keys(state.groups[item]).length
+  )
+  const arrayGroup = Object.keys(state.groups).map(
+    item => {
+      const size = Object.keys(state.groups[item]).length;
+      return {
+        id: item,
+        size
+      }
+    }
+  );
+
+  const tempGroup = () => {
+    // console.log("Props - ", JSON.stringify(props))
     return (
-        <View style={styles.row}>
-            <Pressable
-                style={styles.checkBox}
-                onPress={() => navigation.navigate("Group Details")}
-            >
-                <Text style={styles.title}>Group Name</Text>
-            </Pressable>
-            <View style={styles.info}>
-                <Text style={styles.qty}>QTY</Text>
-                {/* logic to select individual group */}
-                <Pressable
-                    style={styles.checkBox}
-                    onPress={() => console.warn("Delete group")}
-                >
-                    <MaterialIcons name="delete-outline" size={34} color={COLORS.dark.warning} />
-                </Pressable>
-            </View>
+      <View style={[styles.row, { backgroundColor: theme.backgroundColorLight }]}>
+        <Pressable
+          style={styles.checkBox}
+          onPress={() => navigation.navigate("Group Details")}
+        >
+          <Text style={[styles.title, { color: theme.success, }]}>Group Name</Text>
+        </Pressable>
+        <View style={styles.info}>
+          <Text style={[styles.qty, { color: theme.mainText }]}>QTY</Text>
+          {/* logic to select individual group */}
+          <Pressable
+            style={styles.checkBox}
+            onPress={() => console.warn("Delete group")}
+          >
+            <MaterialIcons name="delete-outline" size={34} color={theme.warning} />
+          </Pressable>
         </View>
-    )
-}
+      </View>
 
-const GroupScreen = () => {
-
-    return (
-        <View style={[styles.container, { backgroundColor: "#002b36" }]}>
-            <ScrollView >
-                <TempGroup />
-                <TempGroup />
-                <TempGroup />
-                <TempGroup />
-                <TempGroup />
-                <TempGroup />
-                <TempGroup />
-                <TempGroup />
-                <TempGroup />
-            </ScrollView>
-        </View>
     )
+  };
+
+  return (
+    <View style={[styles.container, { backgroundColor: theme.backgroundColor }]}>
+      <FlatList
+        renderItem={tempGroup}
+        data={arrayGroup}
+        keyExtractor={item => item.id}
+      />
+    </View>
+  )
 };
 export default GroupScreen;
 
 const styles = StyleSheet.create({
-    container: {
-        flex: 1,
-        alignItems: "center",
-    },
-    row: {
-        flexDirection: "row",
-        backgroundColor: COLORS.dark.backgroundColorLight,
-        width: width - 30,
-        height: 60,
-        margin: 8,
-        flexDirection: "row",
-        alignItems: "center",
-        borderRadius: 10,
-        justifyContent: "space-between"
-    },
-    info: {
-        flexDirection: 'row',
-        marginHorizontal: 10,
-    },
-    title: {
-        color: COLORS.dark.success,
-        fontSize: 22,
-        paddingLeft: 20,
-        fontWeight: "700"
-        // fontFamily: "Roboto-Bold"
-    },
-    qty: {
-        color: COLORS.dark.mainText,
-        fontSize: 22,
-        marginHorizontal: 30,
-        paddingTop: 3,
-        // fontWeight: "700"
-    },
+  container: {
+    flex: 1,
+    alignItems: "center",
+  },
+  row: {
+    flexDirection: "row",
+    width: width - 30,
+    height: 60,
+    margin: 8,
+    flexDirection: "row",
+    alignItems: "center",
+    borderRadius: 10,
+    justifyContent: "space-between"
+  },
+  info: {
+    flexDirection: 'row',
+    marginHorizontal: 10,
+  },
+  title: {
+    fontSize: 22,
+    paddingLeft: 20,
+    fontWeight: "700"
+  },
+  qty: {
+    fontSize: 22,
+    marginHorizontal: 30,
+    paddingTop: 3,
+  },
 });

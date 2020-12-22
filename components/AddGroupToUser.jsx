@@ -1,6 +1,5 @@
 import React from 'react'
-import { Text, View, StyleSheet, FlatList } from 'react-native'
-import { Pressable } from 'react-native';
+import { Text, View, StyleSheet, FlatList, Pressable } from 'react-native'
 import { width } from '../constants/colors';
 import { useRandomContext } from "../context/RandomContext"
 
