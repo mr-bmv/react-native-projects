@@ -1,7 +1,8 @@
+import cleanUpFriends from "../actions/cleanUpFriends"
 import getGroups from "../actions/getGroups"
 import removeFromGroup from "../actions/removeFromGroup"
 import setGroups from "../actions/setGroups"
-import { CHANGE_THEME, FETCH_PEOPLE_FAILURE, GET_USERS, SET_GROUP, REMOVE_PERSON, SET_LOADING, DELETE_GROUP, CREATE_GROUP, SET_FRIENDS } from "../actionTypes/randomTypes"
+import { CHANGE_THEME, FETCH_PEOPLE_FAILURE, GET_USERS, SET_GROUP, DELETE_PERSON, REMOVE_PERSON, SET_LOADING, DELETE_GROUP, CREATE_GROUP, SET_FRIENDS } from "../actionTypes/randomTypes"
 
 const handlers = {
   [GET_USERS]: (state, { payload }) => ({ ...state, users: payload, loading: false }),
@@ -12,6 +13,7 @@ const handlers = {
   [CREATE_GROUP]: (state, { payload }) => ({ ...state, groups: setGroups(state.groups, payload) }),
   [SET_FRIENDS]: (state, { payload }) => ({ ...state, friends: { ...state.friends, ...payload } }),
   [REMOVE_PERSON]: (state, { payload }) => ({ ...state, groups: removeFromGroup(state.groups, payload) }),
+  [DELETE_PERSON]: (state, { payload }) => ({ ...state, friends: cleanUpFriends(state.groups, state.friends, payload) }),
   [SET_GROUP]: (state, { payload }) => {
     const personId = Object.keys(payload.data)[0]
     if (state.groups[payload.id].indexOf(personId) === -1) {

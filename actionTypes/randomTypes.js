@@ -7,3 +7,4 @@ export const DELETE_GROUP = 'DELETE_GROUP';
 export const CREATE_GROUP = 'CREATE_GROUP';
 export const SET_FRIENDS = 'SET_FRIENDS';
 export const REMOVE_PERSON = 'REMOVE_PERSON';
+export const DELETE_PERSON = 'DELETE_PERSON';
