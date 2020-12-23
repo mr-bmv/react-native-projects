@@ -59,9 +59,15 @@ const Profile = ({ navigation, route }) => {
 
           <View style={styles.row}>
             <Text style={[styles.text, { color: theme.success }]}>Groups  </Text>
-            <Text style={[styles.text, { color: theme.warning, width: 220 }]}
-              numberOfLines={1}
-            > {groupsString} </Text>
+            <Pressable
+              // style={[styles.button]}
+              // onPress={() => setGroup({ [id]: route.params.item })}
+              onPress={() => navigation.navigate("User Groups", { groupsString })}>
+              <Text style={[styles.text, { color: theme.warning, width: 220 }]}
+                numberOfLines={1}
+              > {groupsString} </Text>
+            </Pressable>
+
           </View>
 
 
@@ -113,6 +119,7 @@ const styles = StyleSheet.create({
     lineHeight: 28,
   },
   row: {
+    alignItems: "center",
     flexDirection: "row",
   },
   button: {

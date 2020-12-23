@@ -13,11 +13,13 @@ const getUserGroups = (groups, user) => {
     console.log(user)
     return Object.keys(groups).reduce((prevValue, group) => {
         if (groups[group].indexOf(user) > -1) {
+
             const groupStr = String(group);
-            const result = `${prevValue} ${groupStr} /`
+            const result = prevValue ? `${prevValue}/${groupStr}` : `${groupStr}`
             console.log("RESULT")
             console.log(result)
             return result
+
         }
         console.log('No')
         return prevValue;

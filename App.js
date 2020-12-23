@@ -15,6 +15,7 @@ import Tabs from './navigation/Tabs'
 import EStyleSheet from 'react-native-extended-stylesheet';
 import GroupDetails from './components/GroupDetails';
 import AddGroupToUser from './components/AddGroupToUser';
+import UserGroups from './components/UserGroups';
 
 const Stack = createStackNavigator();
 
@@ -60,6 +61,7 @@ const Router = () => {
 
           {/* <Stack.Screen name="Main List" component={MainListScreen} /> */}
           <Stack.Screen name="Profile" component={Profile} options={{ title: 'Person Details' }} />
+          <Stack.Screen name="User Groups" component={UserGroups} />
           <Stack.Screen name="SecondScreen" component={SecondScreen} />
           <Stack.Screen name={"Group Details"} component={GroupDetails} />
           <Stack.Screen name={"Add User"} component={AddGroupToUser} />
