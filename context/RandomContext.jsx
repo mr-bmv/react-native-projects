@@ -1,5 +1,5 @@
 import React, { useContext, useState, useReducer } from 'react'
-import { GET_USERS, SET_LOADING, CHANGE_THEME, FETCH_PEOPLE_FAILURE, SET_GROUP, DELETE_GROUP, SET_FRIENDS, CREATE_GROUP } from '../actionTypes/randomTypes';
+import { GET_USERS, SET_LOADING, CHANGE_THEME, FETCH_PEOPLE_FAILURE, REMOVE_PERSON, SET_GROUP, DELETE_GROUP, SET_FRIENDS, CREATE_GROUP } from '../actionTypes/randomTypes';
 import { RandomReducer } from '../reducers/RandomReducer';
 import RandomService from '../services/random-person-service'
 import { COLORS } from '../constants/colors';
@@ -65,6 +65,10 @@ const RandomProvider = ({ children }) => {
     dispatch({ type: CREATE_GROUP, payload: name })
   };
 
+  const removePerson = (data) => {
+    dispatch({ type: REMOVE_PERSON, payload: data })
+  }
+
   const theme = state.darkTheme ? COLORS.dark : COLORS.light;
 
   // console.log("STATE - ", state)
@@ -79,7 +83,8 @@ const RandomProvider = ({ children }) => {
         changeTheme,
         setGroup,
         deleteGroup,
-        createGroup
+        createGroup,
+        removePerson
       }}
     >
       { children}

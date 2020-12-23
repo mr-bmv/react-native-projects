@@ -8,29 +8,33 @@ import { useRandomContext } from '../context/RandomContext';
 import dummy from '../services/dummyUsers'
 
 const GroupDetails = ({ route, navigation }) => {
-    const { state, theme } = useRandomContext();
+    const { state, theme, removePerson } = useRandomContext();
     // const navigation = useNavigation();
 
     const groupName = route.params.item.id
 
-    console.log('--')
-    console.log(route.params.item)
-    console.log('--')
+    // console.log('-Group-')
+    // console.log(route.params.item.id)
+    // console.log('--')
     const arrOfFriends = state.groups[groupName]
-    console.log(arrOfFriends)
+    // console.log(arrOfFriends)
+
 
     const arrOfUserData = arrOfFriends.map(user => {
         return state.friends[user]
     })
 
-    console.log(arrOfUserData)
+    // console.log(arrOfUserData)
 
     const renderItem = ({ item }) => {
+        const personId = item.id
         return (
+            // Person card
             <TouchableOpacity
                 style={[styles.card, { backgroundColor: theme.backgroundColorLight }]}
                 onPress={() => { navigation.navigate('Profile', { item }) }}
             >
+                {/* Main Info about Person */}
                 <View style={{ flexDirection: "row", alignItems: "center" }}>
                     <Image
                         style={styles.image}
@@ -40,9 +44,11 @@ const GroupDetails = ({ route, navigation }) => {
                     />
                     <Text style={[styles.text, { color: theme.mainText, }]}>{item.name}</Text>
                 </View>
+
+                {/* Remove Icon */}
                 <Pressable
-                    style={styles.checkBox}
-                    onPress={() => console.warn("Delete group")}
+                    style={styles.icon}
+                    onPress={() => removePerson([groupName, personId])}
                 >
                     <MaterialIcons name="delete-outline" size={34} color={COLORS.dark.warning} />
                 </Pressable>
@@ -93,7 +99,7 @@ const styles = StyleSheet.create({
     qty: {
         fontSize: 20
     },
-    checkBox: {
+    icon: {
         marginRight: 25
     }
 });
